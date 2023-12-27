@@ -1,5 +1,4 @@
 
-absl-py==0.15.0
 altair==5.2.0
 astunparse==1.6.3
 attrs==23.1.0
@@ -71,6 +70,7 @@ streamlit-lottie==0.0.5
 streamlit-option-menu==0.3.6
 tenacity==8.2.3
 tensorboard==2.11.2
+
 tensorboard-data-server==0.6.1
 tensorboard-plugin-wit==1.8.1
 tensorflow==2.11.0
