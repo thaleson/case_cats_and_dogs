@@ -23,7 +23,7 @@ model = tf.keras.models.load_model("modelo/my_model.h5")
 
 def make_prediction(image_path):
     img = Image.open(image_path).convert("RGB")
-    img = img.resize((150, 150))
+    img = img.resize((128, 128))  # Corrigido para (128, 128)
     img_array = np.array(img) / 255.0  # Normaliza a imagem
     img_array = np.expand_dims(img_array, axis=0)
     prediction = model.predict(img_array)
@@ -77,7 +77,7 @@ if st.button("Fazer Previsão"):
 
 # Adicione uma foto sua
 st.sidebar.image(
-    Image.open("C:/Users/thale/Challenge_1/media/eu1.jpeg"),
+    Image.open("C:/Users/thale/Case/media/eu1.jpeg"),
     caption="Desenvolvedor: Thaleson silva",
     use_column_width=True,
 )
