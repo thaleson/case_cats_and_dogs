@@ -1,0 +1,27 @@
+loss,accuracy,val_loss,val_accuracy,experiment_description
+0.452244,	0.798800,	0.721094,	0.477200,     V1: Resultados coma alterações usando  arquitetura mini_vgg
+0.235304,	0.902229,	0.890817,	0.461333,     V1: Resultados coma alterações usandoa arquitetura mini_vgg
+0.235304,	0.902229,	0.890817,	0.461333,     V1: Resultados coma alterações usando  arquitetura mini_vgg
+0.235304,	0.902229,	0.890817,	0.461333,     V1: Resultados coma alterações usando  arquitetura mini_vgg
+0.235304,	0.902229,	0.890817,	0.461333,     V1: Resultados coma alterações usando  arquitetura mini_vgg
+0.235304,	0.902229,	0.890817,	0.461333,     V1: Resultados coma alterações usando  arquitetura mini_vgg
+0.235304,	0.902229,	0.890817,	0.461333,     V1: Resultados coma alterações usando  arquitetura mini_vgg
+0.235304,	0.902229,	0.890817,	0.461333,     V1: Resultados coma alterações usando  arquitetura mini_vgg
+0.235304,	0.902229,	0.890817,	0.461333,     V1: Resultados coma alterações usando  arquitetura mini_vgg
+0.235304,	0.902229,	0.890817,	0.461333,     V1: Resultados coma alterações usando  arquitetura mini_vgg
+0.251461,   0.896743,   0.706307,   0.678933,     V2: Resultados com alteraões usando EfficientNetBO Adicionei uma camada densa(fully connected)com 258 unidades por fim  adaptei essa camada personalisada para tentar resolver meu problema
+0.067745,	0.974629,	0.408030,	0.831867,     V2: Resultados com alteraões usando EfficientNetBO Adicionei uma camada densa(fully connected)com 258 unidades por fim  adaptei essa camada personalisada para tentar resolver meu problema 
+0.067756,	0.974914,	0.711480,	0.549200,     V2: Resultados com alteraões usando EfficientNetBO Adicionei uma camada densa(fully connected)com 258 unidades por fim  adaptei essa camada personalisada para tentar resolver meu problema
+0.058519,	0.977314,	0.757182,	0.602933,     V2: Resultados com alteraões usando EfficientNetBO Adicionei uma camada densa(fully connected)com 258 unidades por fim  adaptei essa camada personalisada para tentar resolver meu problema
+0.050895,	0.980743,	0.429026,	0.831733,     V2: Resultados com alteraões usando EfficientNetBO Adicionei uma camada densa(fully connected)com 258 unidades por fim  adaptei essa camada personalisada para tentar resolver meu problema 
+0.046252,	0.982914,	0.422392,	0.830133,     V2: Resultados com alteraões usando EfficientNetBO Adicionei uma camada densa(fully connected)com 258 unidades por fim  adaptei essa camada personalisada para tentar resolver meu problema 
+0.239741,	0.903714,	1.255648,	0.496000,     V3: Resultados com alterações usando ResNet50 no conjunto de dados da ImageNet adicionei mais camadas densas para aprendizado mais abstrato e prevesão de overfitting por fim Compila o modelo usando a função de perda de entropia cruzada binária 
+0.133025,	0.949714,	0.669264,	0.592000,     V3: Resultados com alterações usando ResNet50 no conjunto de dados da ImageNet adicionei mais camadas densas para aprendizado mais abstrato e prevesão de overfitting por fim Compila o modelo usando a função de perda de entropia cruzada binária 
+0.110849,	0.957200,	0.165540,	0.931467,     V3: Resultados com alterações usando ResNet50 no conjunto de dados da ImageNet adicionei mais camadas densas para aprendizado mais abstrato e prevesão de overfitting por fim Compila o modelo usando a função de perda de entropia cruzada binária 
+0.099751,	0.962571,	0.066173,	0.974400,     V3: Resultados com alterações usando ResNet50 no conjunto de dados da ImageNet adicionei mais camadas densas para aprendizado mais abstrato e prevesão de overfitting por fim Compila o modelo usando a função de perda de entropia cruzada binária 
+0.085274,	0.967886,	0.063651,	0.977333,     V3: Resultados com alterações usando ResNet50 no conjunto de dados da ImageNet adicionei mais camadas densas para aprendizado mais abstrato e prevesão de overfitting por fim Compila o modelo usando a função de perda de entropia cruzada binária 
+0.077033,	0.970914,	0.100222,	0.963333,     V3: Resultados com alterações usando ResNet50 no conjunto de dados da ImageNet adicionei mais camadas densas para aprendizado mais abstrato e prevesão de overfitting por fim Compila o modelo usando a função de perda de entropia cruzada binária 
+0.068325,	0.974914,	0.063384,	0.977733,     V3: Resultados com alterações usando ResNet50 no conjunto de dados da ImageNet adicionei mais camadas densas para aprendizado mais abstrato e prevesão de overfitting por fim Compila o modelo usando a função de perda de entropia cruzada binária 
+0.063663,	0.975657,	0.112097,	0.962267,     V3: Resultados com alterações usando ResNet50 no conjunto de dados da ImageNet adicionei mais camadas densas para aprendizado mais abstrato e prevesão de overfitting por fim Compila o modelo usando a função de perda de entropia cruzada binária 
+0.058080,	0.978571,	0.065478,	0.977867,     V3: Resultados com alterações usando ResNet50 no conjunto de dados da ImageNet adicionei mais camadas densas para aprendizado mais abstrato e prevesão de overfitting por fim Compila o modelo usando a função de perda de entropia cruzada binária 
+0.056946,	0.979029,	0.082786,	0.978733,     V3: Resultados com alterações usando ResNet50 no conjunto de dados da ImageNet adicionei mais camadas densas para aprendizado mais abstrato e prevesão de overfitting por fim Compila o modelo usando a função de perda de entropia cruzada binária 
