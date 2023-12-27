@@ -13,7 +13,7 @@ from pag.pag1 import show_results
 
 # Carregue o modelo treinado
 # Substitua pelo caminho real do seu modelo
-model = tf.keras.models.load_model("modelo/my_m.h5")
+model = tf.keras.models.load_model("modelo/my_model.h5")
 
 
 # ...

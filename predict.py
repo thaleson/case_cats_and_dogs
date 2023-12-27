@@ -26,7 +26,7 @@ def plot_prediction(image, prediction):
 
 def main():
     # Carregue o modelo
-    model = tf.keras.models.load_model("modelo/vgg.h5")
+    model = tf.keras.models.load_model("modelo/my_Model.h5")
 
     # Substitua 'path/to/your/image.jpg' pelo caminho da imagem que você deseja prever
     image_path = "models/ca3.jpg"
