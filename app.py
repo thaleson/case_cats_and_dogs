@@ -16,7 +16,7 @@ except Exception as e:
 def make_prediction(image_path):
     try:
         img = Image.open(image_path).convert("RGB")
-        img = img.resize((128, 128))  # Corrigido para (128, 128)
+        img = img.resize((128, 128)) / 255.0  # Corrigido para (128, 128)
         img_array = np.array(img) / 255.0  # Normaliza a imagem
         img_array = np.expand_dims(img_array, axis=0)
         prediction = model.predict(img_array)
