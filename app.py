@@ -13,20 +13,30 @@ except Exception as e:
     st.stop()
 
 # Função para fazer previsões
-def make_prediction(image_path):
+def make_prediction(uploaded_file):
     try:
-        img = Image.open(image_path).convert("RGB")
+        img = Image.open(uploaded_file).convert("RGB")
         img = img.resize((128, 128))  # Corrigido para (128, 128)
         img_array = np.array(img) / 255.0  # Normaliza a imagem
         img_array = np.expand_dims(img_array, axis=0)
         prediction = model.predict(img_array)
 
-        # Interpretação da previsão
-        if prediction[0, 0] > 0.5:
-            result = "Cachorro"
+        # Obter a classe prevista e a probabilidade associada
+        class_names = ["Gato", "Cachorro"]
+        max_prob_index = np.argmax(prediction[0])
+        predicted_class = class_names[max_prob_index]
+        max_probability = 100 * prediction[0][max_prob_index]
+
+        if max_probability < 90:  # Se a maior probabilidade for menor que 90%
+            st.warning("Parece que você não enviou uma foto clara de um gato ou cachorro. Por favor, tente outra imagem!")
         else:
-            result = "Gato"
-        return result
+            # Obter as probabilidades para Gato e Cachorro
+            prob_gato = 100 * prediction[0][0]
+            prob_cachorro = 100 * prediction[0][1]
+            
+            # Retorna o resultado e as probabilidades
+            return (predicted_class, prob_gato, prob_cachorro)
+        
     except Exception as e:
         st.error(f"Erro ao fazer a previsão: {str(e)}")
         return None
@@ -47,9 +57,11 @@ if st.button("Fazer Previsão"):
     if uploaded_file is None:
         st.warning("Por favor, carregue uma imagem antes de fazer a previsão.")
     else:
-        prediction = make_prediction(uploaded_file)
-        if prediction:
-            st.write(f"Isto é um : {prediction}")
+        result = make_prediction(uploaded_file)
+        if result:
+            predicted_class, prob_gato, prob_cachorro = result
+            st.success(f"O modelo classificou a imagem como um {predicted_class}.")
+            st.success(f"Com {prob_gato:.1f}% para Gato e {prob_cachorro:.1f}% para Cachorro!")
         else:
             st.error("Ocorreu um erro ao tentar fazer a previsão.")
 
