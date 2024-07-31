@@ -6,7 +6,6 @@ from keras.preprocessing import image
 from pag.pag1 import show_results
 
 # Carregue o modelo treinado
-# Substitua pelo caminho real do seu modelo
 try:
     model = tf.keras.models.load_model("modelo/my_model.h5")
 except Exception as e:
@@ -45,11 +44,9 @@ if uploaded_file is not None:
 
 # Faça a previsão quando o botão for pressionado
 if st.button("Fazer Previsão"):
-    # Verifique se uma imagem foi carregada
     if uploaded_file is None:
         st.warning("Por favor, carregue uma imagem antes de fazer a previsão.")
     else:
-        # Faça a previsão e exiba o resultado
         prediction = make_prediction(uploaded_file)
         if prediction:
             st.write(f"Isto é um : {prediction}")
@@ -79,5 +76,4 @@ st.header("Análise de Resultados")
 
 # Botão para visualizar os resultados
 if st.button("Ver Resultados"):
-    # Chame a função da nova página para exibir os resultados
     show_results()
