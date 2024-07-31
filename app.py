@@ -1,4 +1,3 @@
-pegue as alteraçoes dele  do codigo dele e bote no meu codigo 
 
 import streamlit as st
 from PIL import Image
