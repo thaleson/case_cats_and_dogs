@@ -3,7 +3,7 @@ from PIL import Image
 import numpy as np
 import matplotlib.pyplot as plt
 
-
+#predict exemplo
 def preprocess_image(image_path):
     # Carregue a imagem e faça o pré-processamento
     image = Image.open(image_path)
