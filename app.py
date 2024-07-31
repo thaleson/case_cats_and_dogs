@@ -77,7 +77,7 @@ if st.button("Fazer Previsão"):
 
 # Adicione uma foto sua
 st.sidebar.image(
-    Image.open("C:/Users/thale/Case/media/eu1.jpeg"),
+    Image.open("media/eu1.jpeg"),
     caption="Desenvolvedor: Thaleson silva",
     use_column_width=True,
 )
