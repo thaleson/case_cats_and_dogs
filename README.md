@@ -3,6 +3,7 @@
 
 Cats_and_Dogs_IA é uma solução de deep learning desenvolvida para o desafio, com o objetivo de identificar gatinhos malvados destruidores de poltronas e cachorrinhos fofinhos que compartilham a alegria com o rabinho abanando.
 
+Site do projeto :https://catsanddogspredict.streamlit.app/
 # O projeto é organizado da seguinte forma:
 
 O projeto está organizado nas seguintes pastas e arquivos principais:
