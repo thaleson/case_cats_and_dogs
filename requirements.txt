@@ -26,6 +26,7 @@ jsonschema==4.19.0
 jsonschema-specifications==2023.7.1
 keras==2.13.1
 libclang==16.0.6
+matplotlib
 Markdown==3.4.4
 markdown-it-py==3.0.0
 MarkupSafe==2.1.3
