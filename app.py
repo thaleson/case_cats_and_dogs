@@ -1,8 +1,9 @@
+pegue as alteraçoes dele  do codigo dele e bote no meu codigo 
+
 import streamlit as st
 from PIL import Image
 import numpy as np
 import tensorflow as tf
-import time
 
 # Carregar o modelo
 model_path = "modelo/my_model.h5"
@@ -11,6 +12,7 @@ try:
 except Exception as e:
     st.error(f"Erro ao carregar o modelo: {str(e)}")
     st.stop()
+
 
 # Função de previsão
 def make_prediction(image):
@@ -42,27 +44,9 @@ if uploaded_file:
     st.image(image, caption="Imagem de Entrada", use_column_width=True)
 
     if st.button("Fazer Previsão"):
-        # Simula um processo de classificação com uma barra de progresso
-        progress_bar = st.progress(0)
-        for percent_complete in range(100):
-            time.sleep(0.01)
-            progress_bar.progress(percent_complete + 1)
-
-        # Faz a previsão
-        predicted_class, max_probability = make_prediction(image)
-        
-        if predicted_class:
-            if max_probability < 90:  # Se a maior probabilidade for menor que 90%
-                st.warning("Parece que você não enviou uma foto clara de um gato ou cachorro. Por favor, tente outra imagem!")
-            else:
-                # Obtém as probabilidades para Gato e Cachorro
-                prob_gato = 100 * (1 - prediction[0][1])
-                prob_cachorro = 100 * prediction[0][1]
-
-                # Mostra a classificação
-                st.success(f"O modelo classificou a imagem como um {predicted_class}.")
-                
-                # Mostra as probabilidades
-                st.success(f"Com {prob_gato:.1f}% para Gato e {prob_cachorro:.1f}% para Cachorro!")
+        prediction = make_prediction(uploaded_file)
+        if prediction:
+            st.write(f"Isto é um : {prediction}")
         else:
             st.error("Ocorreu um erro ao tentar fazer a previsão.")
+
