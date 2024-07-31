@@ -27,8 +27,9 @@ def make_prediction(uploaded_file):
         predicted_class = class_names[max_prob_index]
         max_probability = 100 * prediction[0][max_prob_index]
 
+        # Verificar se a probabilidade é alta o suficiente para considerar a imagem como Gato ou Cachorro
         if max_probability < 90:  # Se a maior probabilidade for menor que 90%
-            st.warning("Parece que você não enviou uma foto clara de um gato ou cachorro. Por favor, tente outra imagem!")
+            return "Imagem não reconhecida como Gato ou Cachorro"
         else:
             # Obter as probabilidades para Gato e Cachorro
             prob_gato = 100 * prediction[0][0]
@@ -59,9 +60,12 @@ if st.button("Fazer Previsão"):
     else:
         result = make_prediction(uploaded_file)
         if result:
-            predicted_class, prob_gato, prob_cachorro = result
-            st.success(f"O modelo classificou a imagem como um {predicted_class}.")
-            st.success(f"Com {prob_gato:.1f}% para Gato e {prob_cachorro:.1f}% para Cachorro!")
+            if isinstance(result, tuple):
+                predicted_class, prob_gato, prob_cachorro = result
+                st.success(f"O modelo classificou a imagem como um {predicted_class}.")
+                st.success(f"Com {prob_gato:.1f}% para Gato e {prob_cachorro:.1f}% para Cachorro!")
+            else:
+                st.error(result)  # Exibe a mensagem de erro se a imagem não for clara o suficiente
         else:
             st.error("Ocorreu um erro ao tentar fazer a previsão.")
 
