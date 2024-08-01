@@ -40,18 +40,18 @@ def make_prediction(uploaded_file):
         # Verificar se a imagem pode ser considerada como Gato ou Cachorro
         min_prob_threshold = 50  # Define um limiar mínimo de probabilidade
         if prob_gato < min_prob_threshold and prob_cachorro < min_prob_threshold:
-            return None, "Imagem não reconhecida como Gato ou Cachorro. Por favor, carregue uma imagem válida."
+            return None, "Imagem não reconhecida como Gato ou Cachorro. Por favor, carregue uma imagem válida de um gato ou cachorro."
 
         # Retorna o resultado e as probabilidades
         return (predicted_class, prob_gato, prob_cachorro), None
         
     except Exception as e:
-        st.error(f"Erro ao fazer a previsão: {str(e)}")
         return None, str(e)
 
 # Configurações do Streamlit
 st.title("Cats_and_Dogs_IA: Classificador de Gatos e Cachorros 🐶🐱🐾")
 st.subheader("Faça uma previsão: Cachorro ou Gato?")
+st.info("Este modelo só pode prever se uma imagem é de um gato ou cachorro. Por favor, carregue uma imagem correspondente.")
 
 uploaded_file = st.file_uploader("Escolha uma imagem...", type=["jpg", "jpeg", "png"])
 
