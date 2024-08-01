@@ -56,6 +56,7 @@ rpds-py==0.10.0
 rsa==4.9
 six==1.16.0
 seaborn
+sklearn
 smmap==5.0.0
 streamlit==1.26.0
 streamlit-lottie==0.0.5
