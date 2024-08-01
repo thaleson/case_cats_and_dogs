@@ -38,7 +38,7 @@ def make_prediction(uploaded_file):
         prob_cachorro = 100 * prediction[0][1]
 
         # Verificar se a imagem pode ser considerada como Gato ou Cachorro
-        min_prob_threshold = 50  # Define um limiar mínimo de probabilidade
+        min_prob_threshold = 10  # Define um limiar mínimo de probabilidade
         if prob_gato < min_prob_threshold and prob_cachorro < min_prob_threshold:
             return None, "Imagem não reconhecida como Gato ou Cachorro. Por favor, carregue uma imagem válida de um gato ou cachorro."
 
@@ -48,52 +48,17 @@ def make_prediction(uploaded_file):
     except Exception as e:
         return None, str(e)
 
-# CSS para estilização personalizada
-st.markdown("""
-<style>
-    .stApp {
-        background-color: #f5f5f5;
-    }
-    .title {
-        font-size: 2em;
-        font-weight: bold;
-        color: #2c3e50;
-    }
-    .subtitle {
-        font-size: 1.5em;
-        color: #34495e;
-    }
-    .instructions {
-        font-size: 1.2em;
-        color: #7f8c8d;
-    }
-    .result-success {
-        font-size: 1.5em;
-        color: #27ae60;
-    }
-    .result-error {
-        font-size: 1.5em;
-        color: #e74c3c;
-    }
-    .image-preview {
-        border: 2px solid #bdc3c7;
-        padding: 10px;
-        border-radius: 5px;
-    }
-</style>
-""", unsafe_allow_html=True)
-
 # Configurações do Streamlit
-st.markdown("<div class='title'>Cats_and_Dogs_IA: Classificador de Gatos e Cachorros 🐶🐱🐾</div>", unsafe_allow_html=True)
-st.markdown("<div class='subtitle'>Faça uma previsão: Cachorro ou Gato?</div>", unsafe_allow_html=True)
-st.markdown("<div class='instructions'>Este modelo só pode prever se uma imagem é de um gato ou cachorro. Por favor, carregue uma imagem correspondente.</div>", unsafe_allow_html=True)
+st.title("Cats_and_Dogs_IA: Classificador de Gatos e Cachorros 🐶🐱🐾")
+st.subheader("Faça uma previsão: Cachorro ou Gato?")
+st.info("Este modelo só pode prever se uma imagem é de um gato ou cachorro. Por favor, carregue uma imagem correspondente.")
 
 uploaded_file = st.file_uploader("Escolha uma imagem...", type=["jpg", "jpeg", "png"])
 
 if uploaded_file is not None:
     # Exiba a imagem carregada
     image = Image.open(uploaded_file)
-    st.image(image, caption="Imagem de Entrada", use_column_width=True, output_format="JPEG", className="image-preview")
+    st.image(image, caption="Imagem de Entrada", use_column_width=True)
 
 # Faça a previsão quando o botão for pressionado
 if st.button("Fazer Previsão"):
@@ -102,12 +67,12 @@ if st.button("Fazer Previsão"):
     else:
         result, error = make_prediction(uploaded_file)
         if error:
-            st.markdown(f"<div class='result-error'>{error}</div>", unsafe_allow_html=True)
+            st.error(error)
             st.image("media/error_image.png", caption="Imagem inválida", use_column_width=True)  # Exibe uma imagem de erro
         else:
             predicted_class, prob_gato, prob_cachorro = result
-            st.markdown(f"<div class='result-success'>O modelo classificou a imagem como um {predicted_class}.</div>", unsafe_allow_html=True)
-            st.markdown(f"<div class='result-success'>Com {prob_gato:.1f}% para Gato e {prob_cachorro:.1f}% para Cachorro!</div>", unsafe_allow_html=True)
+            st.success(f"O modelo classificou a imagem como um {predicted_class}.")
+            st.success(f"Com {prob_gato:.1f}% para Gato e {prob_cachorro:.1f}% para Cachorro!")
 
 # Adicione uma foto sua
 try:
