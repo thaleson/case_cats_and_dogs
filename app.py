@@ -2,8 +2,6 @@ import streamlit as st
 import numpy as np
 from PIL import Image
 import tensorflow as tf
-from keras.preprocessing import image
-from pag.pag1 import show_results
 import time
 
 # Carregue o modelo treinado
@@ -35,16 +33,17 @@ def make_prediction(uploaded_file):
         predicted_class = class_names[max_prob_index]
         max_probability = 100 * prediction[0][max_prob_index]
 
-        # Verificar se a probabilidade é alta o suficiente para considerar a imagem como Gato ou Cachorro
-        if max_probability < 90:  # Se a maior probabilidade for menor que 90%
-            return None, "Imagem não reconhecida como Gato ou Cachorro"
-        else:
-            # Obter as probabilidades para Gato e Cachorro
-            prob_gato = 100 * prediction[0][0]
-            prob_cachorro = 100 * prediction[0][1]
-            
-            # Retorna o resultado e as probabilidades
-            return (predicted_class, prob_gato, prob_cachorro), None
+        # Obter as probabilidades para Gato e Cachorro
+        prob_gato = 100 * prediction[0][0]
+        prob_cachorro = 100 * prediction[0][1]
+
+        # Verificar se a imagem pode ser considerada como Gato ou Cachorro
+        min_prob_threshold = 50  # Define um limiar mínimo de probabilidade
+        if prob_gato < min_prob_threshold and prob_cachorro < min_prob_threshold:
+            return None, "Imagem não reconhecida como Gato ou Cachorro. Por favor, carregue uma imagem válida."
+
+        # Retorna o resultado e as probabilidades
+        return (predicted_class, prob_gato, prob_cachorro), None
         
     except Exception as e:
         st.error(f"Erro ao fazer a previsão: {str(e)}")
