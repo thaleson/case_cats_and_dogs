@@ -2,6 +2,8 @@ import streamlit as st
 import numpy as np
 from PIL import Image
 import tensorflow as tf
+from keras.preprocessing import image
+from pag.pag1 import show_results
 import time
 
 # Carregue o modelo treinado
