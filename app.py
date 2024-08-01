@@ -4,6 +4,7 @@ from PIL import Image
 import tensorflow as tf
 from keras.preprocessing import image
 from pag.pag1 import show_results
+import time
 
 # Carregue o modelo treinado
 try:
@@ -19,6 +20,13 @@ def make_prediction(uploaded_file):
         img = img.resize((128, 128))  # Corrigido para (128, 128)
         img_array = np.array(img) / 255.0  # Normaliza a imagem
         img_array = np.expand_dims(img_array, axis=0)
+
+        # Simulação de progresso (apenas para efeito visual)
+        progress_bar = st.progress(0)
+        for percent in range(0, 101, 10):
+            time.sleep(0.1)
+            progress_bar.progress(percent)
+        
         prediction = model.predict(img_array)
 
         # Obter a classe prevista e a probabilidade associada
@@ -29,18 +37,18 @@ def make_prediction(uploaded_file):
 
         # Verificar se a probabilidade é alta o suficiente para considerar a imagem como Gato ou Cachorro
         if max_probability < 90:  # Se a maior probabilidade for menor que 90%
-            return "Imagem não reconhecida como Gato ou Cachorro"
+            return None, "Imagem não reconhecida como Gato ou Cachorro"
         else:
             # Obter as probabilidades para Gato e Cachorro
             prob_gato = 100 * prediction[0][0]
             prob_cachorro = 100 * prediction[0][1]
             
             # Retorna o resultado e as probabilidades
-            return (predicted_class, prob_gato, prob_cachorro)
+            return (predicted_class, prob_gato, prob_cachorro), None
         
     except Exception as e:
         st.error(f"Erro ao fazer a previsão: {str(e)}")
-        return None
+        return None, str(e)
 
 # Configurações do Streamlit
 st.title("Cats_and_Dogs_IA: Classificador de Gatos e Cachorros 🐶🐱🐾")
@@ -58,16 +66,14 @@ if st.button("Fazer Previsão"):
     if uploaded_file is None:
         st.warning("Por favor, carregue uma imagem antes de fazer a previsão.")
     else:
-        result = make_prediction(uploaded_file)
-        if result:
-            if isinstance(result, tuple):
-                predicted_class, prob_gato, prob_cachorro = result
-                st.success(f"O modelo classificou a imagem como um {predicted_class}.")
-                st.success(f"Com {prob_gato:.1f}% para Gato e {prob_cachorro:.1f}% para Cachorro!")
-            else:
-                st.error(result)  # Exibe a mensagem de erro se a imagem não for clara o suficiente
+        result, error = make_prediction(uploaded_file)
+        if error:
+            st.error(error)
+            st.image("media/error_image.png", caption="Imagem inválida", use_column_width=True)  # Exibe uma imagem de erro
         else:
-            st.error("Ocorreu um erro ao tentar fazer a previsão.")
+            predicted_class, prob_gato, prob_cachorro = result
+            st.success(f"O modelo classificou a imagem como um {predicted_class}.")
+            st.success(f"Com {prob_gato:.1f}% para Gato e {prob_cachorro:.1f}% para Cachorro!")
 
 # Adicione uma foto sua
 try:
