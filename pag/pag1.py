@@ -1,8 +1,6 @@
 import streamlit as st
 import pandas as pd
 import matplotlib.pyplot as plt
-import seaborn as sns
-from sklearn.metrics import confusion_matrix, classification_report, roc_curve, auc
 
 def show_results():
     # Carregue os dados do CSV
@@ -15,21 +13,25 @@ def show_results():
 
     # Detecta se o fundo é claro ou escuro
     background_color = st.get_option("theme.backgroundColor")  # Obtém a cor de fundo atual
-    light_mode = True if background_color and background_color.lower() in ["#ffffff", "white", "rgb(255, 255, 255)"] else False
-    
+    if background_color:
+        light_mode = True if background_color.lower() in ["#ffffff", "white", "rgb(255, 255, 255)"] else False
+    else:
+        light_mode = False
+
     text_color = '#000000' if light_mode else '#ecf0f1'
     subtitle_color = '#2c3e50' if light_mode else '#bdc3c7'
 
     # Título da página
     st.markdown(f"<h1 style='color: {text_color};'>Resultados de Treinamento e Validação</h1>", unsafe_allow_html=True)
 
+  
+
     # Descrição introdutória
     st.markdown(f"""
     <div style="font-size:18px; color:{subtitle_color}; line-height:1.5;">
-        Bem-vindo à página de resultados! Aqui você pode visualizar os dados de treinamento e validação
-        do modelo de classificação de imagens. Analisaremos a evolução das métricas ao longo das épocas,
-        incluindo gráficos de perda (loss), acurácia, e mais. Use estas informações para avaliar o comportamento
-        e a eficácia do modelo.
+        Bem-vindo à página de resultados! Aqui, você pode visualizar os dados de treinamento e validação
+        do modelo de classificação de imagens. Os gráficos abaixo mostram as métricas de desempenho ao longo
+        das épocas de treinamento. Use estas informações para avaliar o comportamento e a eficácia do modelo.
     </div>
     """, unsafe_allow_html=True)
 
@@ -87,44 +89,15 @@ def show_results():
     plt.setp(ax.get_yticklabels(), color=text_color)
     st.pyplot(fig)
 
-    # Matriz de Confusão
-    st.markdown(f"<h2 style='color: {text_color};'>Matriz de Confusão</h2>", unsafe_allow_html=True)
-    y_true = df['true_labels']  # Adapte conforme o nome da coluna no seu CSV
-    y_pred = df['predicted_labels']  # Adapte conforme o nome da coluna no seu CSV
-    cm = confusion_matrix(y_true, y_pred, labels=[0, 1])
-    fig, ax = plt.subplots(figsize=(8, 6))
-    sns.heatmap(cm, annot=True, fmt='d', cmap='Blues', xticklabels=['Gato', 'Cachorro'], yticklabels=['Gato', 'Cachorro'])
-    ax.set_xlabel('Predição', color=text_color)
-    ax.set_ylabel('Real', color=text_color)
-    ax.set_title('Matriz de Confusão', color=text_color)
-    plt.setp(ax.get_xticklabels(), color=text_color)
-    plt.setp(ax.get_yticklabels(), color=text_color)
-    st.pyplot(fig)
+    # Mensagem final
+    st.markdown(f"""
+    <div style="font-size:16px; color:{subtitle_color}; line-height:1.5;">
+        Esses resultados ajudam a identificar se o modelo está aprendendo de forma eficiente
+        ou se há sinais de overfitting ou underfitting. Continue ajustando e validando seu modelo
+        para alcançar uma performance ótima.
+    </div>
+    """, unsafe_allow_html=True)
 
-    # Curva ROC
-    st.markdown(f"<h2 style='color: {text_color};'>Curva ROC</h2>", unsafe_allow_html=True)
-    # Adapte y_true e y_scores conforme suas colunas
-    y_true = df['true_labels']  # Adapte conforme o nome da coluna no seu CSV
-    y_scores = df['predicted_scores']  # Adapte conforme o nome da coluna no seu CSV
-    fpr, tpr, _ = roc_curve(y_true, y_scores)
-    roc_auc = auc(fpr, tpr)
-    fig, ax = plt.subplots(figsize=(10, 6))
-    ax.plot(fpr, tpr, color='darkorange', lw=2, label='Curva ROC (área = %0.2f)' % roc_auc)
-    ax.plot([0, 1], [0, 1], color='navy', lw=2, linestyle='--')
-    ax.set_xlim([0.0, 1.0])
-    ax.set_ylim([0.0, 1.05])
-    ax.set_xlabel('Taxa de Falsos Positivos', color=text_color)
-    ax.set_ylabel('Taxa de Verdadeiros Positivos', color=text_color)
-    ax.set_title('Curva ROC', color=text_color)
-    ax.legend(loc='lower right')
-    plt.setp(ax.get_xticklabels(), color=text_color)
-    plt.setp(ax.get_yticklabels(), color=text_color)
-    st.pyplot(fig)
-
-    # Classificação Report
-    st.markdown(f"<h2 style='color: {text_color};'>Relatório de Classificação</h2>", unsafe_allow_html=True)
-    classification_rep = classification_report(y_true, y_pred, target_names=['Gato', 'Cachorro'])
-    st.text(classification_rep)
 
 # Execute a função quando este script for executado diretamente
 if __name__ == "__main__":
