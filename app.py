@@ -2,23 +2,16 @@ import streamlit as st
 import numpy as np
 from PIL import Image
 import tensorflow as tf
-from keras.preprocessing import image
-from pag.pag1 import show_results
 import time
-
-
-
-
+from pag.pag1 import show_results
 
 # Configuração da página principal
 st.set_page_config(page_title="CatsandDogs", page_icon="🌎")
 
-
-
-
-# aplicar estilos de css a pagina
+# Aplicar estilos de CSS à página
 with open("styles.css") as f:
     st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
+
 # Carregue o modelo treinado
 try:
     model = tf.keras.models.load_model("modelo/my_model.h5")
