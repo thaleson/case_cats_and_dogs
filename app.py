@@ -7,6 +7,12 @@ from pag.pag1 import show_results
 import time
 
 
+
+# aplicar estilos de css a pagina
+with open("style.css") as f:
+    st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
+
+
 # Configuração da página principal
 st.set_page_config(page_title="CatsandDogs", page_icon="🐾")
 
