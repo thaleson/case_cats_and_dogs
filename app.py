@@ -6,6 +6,10 @@ from keras.preprocessing import image
 from pag.pag1 import show_results
 import time
 
+
+# Configuração da página principal
+st.set_page_config(page_title="CatsandDogs", page_icon="🐾")
+
 # Carregue o modelo treinado
 try:
     model = tf.keras.models.load_model("modelo/my_model.h5")
