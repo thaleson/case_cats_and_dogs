@@ -11,7 +11,7 @@ import time
 
 
 # Configuração da página principal
-st.set_page_config(page_title="CatsandDogs", page_icon="🐾")
+st.set_page_config(page_title="CatsandDogs", page_icon="🌎")
 
 
 
